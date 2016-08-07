@@ -1,6 +1,11 @@
 FROM ubuntu:latest
 MAINTAINER Toshiyuki HIRANO <hiracchi@gmail.com>
 
+# ENV APT_SERVER  archive.ubuntu.com
+# ENV APT_SERVER jp.archive.ubuntu.com
+ENV APT_SERVER ftp.riken.jp/Linux
+# ENV APT_SERVER ftp.jaist.ac.jp/pub/Linux/
+
 RUN apt-get update && apt-get install -y \
     wget \
     && apt-get clean \
@@ -15,7 +20,7 @@ ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:en
 ENV LC_ALL ja_JP.UTF-8
 
-RUN sed -i~ -e 's/archive.ubuntu.com/jp.archive.ubuntu.com/' /etc/apt/sources.list
+RUN sed -i -e "s|archive.ubuntu.com|${APT_SERVER}|g" /etc/apt/sources.list
 RUN apt-get update && apt-get upgrade -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
