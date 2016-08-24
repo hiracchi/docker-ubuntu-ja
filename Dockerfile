@@ -2,8 +2,8 @@ FROM ubuntu:latest
 MAINTAINER Toshiyuki HIRANO <hiracchi@gmail.com>
 
 # ENV APT_SERVER  archive.ubuntu.com
-# ENV APT_SERVER jp.archive.ubuntu.com
-ENV APT_SERVER ftp.riken.jp/Linux
+ENV APT_SERVER jp.archive.ubuntu.com
+# ENV APT_SERVER ftp.riken.jp/Linux
 # ENV APT_SERVER ftp.jaist.ac.jp/pub/Linux/
 
 RUN apt-get update && apt-get install -y \
