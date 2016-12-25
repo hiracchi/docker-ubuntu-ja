@@ -29,3 +29,6 @@ RUN update-locale LANG=ja_JP.UTF-8
 RUN mv /etc/localtime /etc/localtime.orig
 RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/bin/tail", "-f", "/dev/null"]
