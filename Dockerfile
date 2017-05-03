@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:latest
 MAINTAINER Toshiyuki HIRANO <hiracchi@gmail.com>
 
 ARG BUILD_DATE
