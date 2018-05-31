@@ -1,6 +1,5 @@
 PACKAGE=ubuntu-ja
 TAG=latest
-BRANCH=master
 
 .PHONY: build run exec
 
