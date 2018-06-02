@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+umask 0000
 
 if [ -z "$*" ]; then
     tail -f /dev/null
@@ -17,11 +18,10 @@ else
         fi
         cd ${DOCKER_WORKDIR}
     fi
-    
+
     if [ x${DOCKER_USER} != x ]; then
         sudo -u ${DOCKER_USER} "$*"
     else
         eval "$*"
     fi
 fi
-
