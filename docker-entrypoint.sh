@@ -11,7 +11,7 @@ if [ x"${GROUP_ID}" != x"0" ]; then
     groupadd --non-unique --gid ${GROUP_ID} ${GROUP_NAME}
 fi
 if [ x"${USER_ID}" != x"0" ]; then
-    useradd -d /home/${USER_NAME} -m -s /bin/bash -u ${USER_ID} -g ${GROUP_ID} ${USER_NAME}
+    useradd -d /home/${USER_NAME} -m -s /bin/bash -u ${USER_ID} -g users -G sudo,video,${GROUP_NAME} ${USER_NAME}
 fi
 
 
