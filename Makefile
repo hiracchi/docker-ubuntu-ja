@@ -1,6 +1,7 @@
-PACKAGE="hiracchi/ubuntu-ja"
+PACKAGE=hiracchi/ubuntu-ja
 TAG=latest
-CONTAINER_NAME="ubuntu-ja"
+CONTAINER_NAME=ubuntu-ja
+ARG=
 
 .PHONY: build start stop restart term logs
 
@@ -9,15 +10,23 @@ build:
 
 
 start:
-	\$(eval USER_ID := $(shell id -u))
-	\$(eval GROUP_ID := $(shell id -g))
-	docker run -d \
+	@\$(eval USER_ID := $(shell id -u))
+	@\$(eval GROUP_ID := $(shell id -g))
+	@echo "start docker as ${USER_ID}:${GROUP_ID}"
+	docker run -t \
 		--rm \
 		--name ${CONTAINER_NAME} \
 		-u $(USER_ID):$(GROUP_ID) \
-		"${PACKAGE}:${TAG}"
-	#sleep 4
-	docker ps -a
+		"${PACKAGE}:${TAG}" ${ARG}
+
+
+start_as_root:
+	@echo "start docker as root"
+	docker run -t \
+		--rm \
+		--name ${CONTAINER_NAME} \
+		"${PACKAGE}:${TAG}" ${ARG}
+
 
 stop:
 	docker rm -f ${CONTAINER_NAME}

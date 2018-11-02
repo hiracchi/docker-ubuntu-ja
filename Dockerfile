@@ -9,8 +9,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       maintainer="Toshiyuki Hirano <hiracchi@gmail.com>"
 
-ENV GROUP_NAME="dkusr" GROUP_ID="12345"
-ENV USER_NAME="dkusr" USER_ID="12345"
+ENV GROUP_NAME="worker" GROUP_ID="10001"
+ENV USER_NAME="worker" USER_ID="10001"
 
 
 # -----------------------------------------------------------------------------
