@@ -6,14 +6,14 @@ ARG=
 .PHONY: build start stop restart term logs
 
 build:
-	docker build -t "${PACKAGE}:${TAG}" .
+	docker build -t "${PACKAGE}:${TAG}" . 2>&1 | tee docker-build.log
 
 
 start:
 	@\$(eval USER_ID := $(shell id -u))
 	@\$(eval GROUP_ID := $(shell id -g))
 	@echo "start docker as ${USER_ID}:${GROUP_ID}"
-	docker run -t \
+	docker run -d \
 		--rm \
 		--name ${CONTAINER_NAME} \
 		-u $(USER_ID):$(GROUP_ID) \
