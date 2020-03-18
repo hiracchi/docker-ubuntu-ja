@@ -28,7 +28,8 @@ ARG APT_SERVER="archive.ubuntu.com"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ="Asia/Tokyo"
-ENV LANG="ja_JP.UTF-8" LANGUAGE="ja_JP:en" LC_ALL="ja_JP.UTF-8" 
+# ENV LANG="ja_JP.UTF-8" LANGUAGE="ja_JP:en" LC_ALL="ja_JP.UTF-8" 
+ENV LANG="C" LC_ALL="C" 
 
 RUN set -x \
   && sed -i -e "s|archive.ubuntu.com|${APT_SERVER}|g" /etc/apt/sources.list \
