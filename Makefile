@@ -23,7 +23,7 @@ start:
 
 start_as_root:
 	@echo "start docker as root"
-	docker run -t \
+	docker run -d \
 		--rm \
 		--name ${CONTAINER_NAME} \
 		"${PACKAGE}:${TAG}" ${ARG}
