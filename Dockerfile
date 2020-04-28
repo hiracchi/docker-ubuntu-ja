@@ -31,25 +31,27 @@ ENV TZ="Asia/Tokyo"
 # ENV LANG="ja_JP.UTF-8" LANGUAGE="ja_JP:en" LC_ALL="ja_JP.UTF-8" 
 ENV LANG="C" LC_ALL="C" 
 
-RUN set -x \
-  && sed -i -e "s|archive.ubuntu.com|${APT_SERVER}|g" /etc/apt/sources.list \
-  && apt-get update \
-  && apt-get install -y \
-  apt-utils sudo wget curl ca-certificates gnupg locales language-pack-ja tzdata \
-  && wget -q "https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg" -O - | apt-key add - \
-  && wget -q "https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg" -O - | apt-key add - \
-  && wget -q "https://www.ubuntulinux.jp/sources.list.d/bionic.list" -O /etc/apt/sources.list.d/ubuntu-ja.list \
-  && apt-get update \
-  && apt-get upgrade -y \
-  && locale-gen ja_JP.UTF-8 \
-  && update-locale LANG=ja_JP.UTF-8 \
-  && apt-get install -y tzdata \
-  && echo "${TZ}" > /etc/timezone \
-  && mv /etc/localtime /etc/localtime.orig \
-  && ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-  && dpkg-reconfigure -f noninteractive tzdata \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN set -x && \
+  sed -i -e "s|archive.ubuntu.com|${APT_SERVER}|g" /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+  apt-utils sudo wget curl ca-certificates gnupg locales language-pack-ja tzdata bash \
+  && \
+  wget -q "https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg" -O - | apt-key add - && \
+  wget -q "https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg" -O - | apt-key add - && \
+  wget -q "https://www.ubuntulinux.jp/sources.list.d/bionic.list" -O /etc/apt/sources.list.d/ubuntu-ja.list && \
+  apt-get update && \
+  apt-get upgrade -y && \
+  echo "dash dash/sh boolean false" | debconf-set-selections && \
+  dpkg-reconfigure dash && \
+  locale-gen ja_JP.UTF-8 && \
+  update-locale LANG=ja_JP.UTF-8 && \
+  echo "${TZ}" > /etc/timezone && \
+  mv /etc/localtime /etc/localtime.orig && \
+  ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+  dpkg-reconfigure -f noninteractive tzdata && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 
 # -----------------------------------------------------------------------------

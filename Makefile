@@ -17,6 +17,7 @@ start:
 		--rm \
 		--name ${CONTAINER_NAME} \
 		-u $(USER_ID):$(GROUP_ID) \
+		--volume ${PWD}:/work \
 		"${PACKAGE}:${TAG}" ${ARG}
 
 
