@@ -1,12 +1,17 @@
+MACHINE := $(shell uname -m)
+
 PACKAGE=hiracchi/ubuntu-ja
-TAG=latest
+TAG=$(MACHINE)-latest
 CONTAINER_NAME=ubuntu-ja
 ARG=
+
 
 .PHONY: build start stop restart term logs
 
 build:
-	docker build -t "${PACKAGE}:${TAG}" . 2>&1 | tee docker-build.log
+	docker build \
+		-f Dockerfile.$(MACHINE) \
+		-t "${PACKAGE}:${TAG}" . 2>&1 | tee docker-build.log
 
 
 start:
