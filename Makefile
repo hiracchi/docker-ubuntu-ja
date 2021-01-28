@@ -1,5 +1,5 @@
 PACKAGE=hiracchi/ubuntu-ja
-TAG=latest
+TAG=20.04
 CONTAINER_NAME=ubuntu-ja
 ARG=
 

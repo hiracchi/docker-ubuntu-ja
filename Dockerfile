@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -38,7 +38,7 @@ RUN set -x \
   apt-utils sudo wget curl ca-certificates gnupg locales language-pack-ja tzdata \
   && wget -q "https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg" -O - | apt-key add - \
   && wget -q "https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg" -O - | apt-key add - \
-  && wget -q "https://www.ubuntulinux.jp/sources.list.d/bionic.list" -O /etc/apt/sources.list.d/ubuntu-ja.list \
+  && wget -q "https://www.ubuntulinux.jp/sources.list.d/focal.list" -O /etc/apt/sources.list.d/ubuntu-ja.list \
   && apt-get update \
   && apt-get upgrade -y \
   && locale-gen ja_JP.UTF-8 \
@@ -60,7 +60,7 @@ RUN set -x && \
   adduser --uid ${USER_ID} --ingroup ${GROUP_NAME} --home /home/${USER_NAME} \
   --shell /bin/bash --disabled-password --gecos "" ${USER_NAME} \
   && \
-  curl -SsL "https://github.com/boxboat/fixuid/releases/download/v0.4/fixuid-0.4-linux-amd64.tar.gz" | tar -C /usr/local/bin -xzf - && \
+  curl -SsL "https://github.com/boxboat/fixuid/releases/download/v0.5/fixuid-0.5-linux-amd64.tar.gz" | tar -C /usr/local/bin -xzf - && \
   chmod 4755 /usr/local/bin/fixuid && \
   mkdir -p /etc/fixuid && \
   printf "user: ${USER_NAME}\ngroup: ${GROUP_NAME}\n" > /etc/fixuid/config.yml
